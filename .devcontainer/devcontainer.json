@@ -1,0 +1,45 @@
+{
+    "name": "ROS 2 Development Container",
+    "privileged": true,
+    "remoteUser": "ros",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "USERNAME": "ros"
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers-extra/features/starship:1": {},
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "twxs.cmake",
+                "donjayamanne.python-extension-pack",
+                "eamodio.gitlens",
+                "ms-iot.vscode-ros"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "unix:0",
+        "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
+        "ROS_DOMAIN_ID": "42"
+    },
+    "runArgs": [
+        "--net=host",
+        "--pid=host",
+        "--ipc=host",
+        "-e",
+        "DISPLAY=${env:DISPLAY}"
+    ],
+    "postCreateCommand": {
+        "source ros libraries": "echo source /opt/ros/humble/setup.bash >> ~/.bashrc",
+        "source workspace": "echo source /workspaces/robot_collision_checking/install/setup.bash",
+        "initialize rosdep": "sudo apt-get update && rosdep update && sudo rosdep install --from-paths src --ignore-src -y",
+        "initialize starship": "echo eval '$(starship init bash)' >> ~/.bashrc"
+    }
+}

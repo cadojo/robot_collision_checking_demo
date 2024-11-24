@@ -1,0 +1,6 @@
+[submodule "src/-f"]
+	path = src/-f
+	url = https://github.com/philip-long/robot_collision_checking
+[submodule "src/robot_collision_checking"]
+	path = src/robot_collision_checking
+	url = https://github.com/philip-long/robot_collision_checking
