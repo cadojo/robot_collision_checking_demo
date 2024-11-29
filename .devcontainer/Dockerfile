@@ -21,7 +21,7 @@ ENV SHELL /bin/bash
 USER $USERNAME
 
 RUN sudo apt-get update && sudo apt-get install -y \
-    python3-colcon-clean git libboost-all-dev
+    python3-colcon-clean git libboost-all-dev liboctomap-dev
 
 RUN cd /tmp && git clone https://github.com/danfis/libccd.git && cd libccd \
     && mkdir -p build && cd build \
