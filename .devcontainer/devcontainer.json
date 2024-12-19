@@ -3,7 +3,7 @@
     "privileged": true,
     "remoteUser": "ros",
     "build": {
-        "dockerfile": "Dockerfile",
+        "dockerfile": "../src/robot_collision_checking/Dockerfile",
         "args": {
             "USERNAME": "ros"
         }
