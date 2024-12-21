@@ -25,10 +25,13 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": "unix:0",
+        "DISPLAY": ":0",
         "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
         "ROS_DOMAIN_ID": "42"
     },
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+    ],
     "runArgs": [
         "--net=host",
         "--pid=host",
@@ -37,9 +40,9 @@
         "DISPLAY=${env:DISPLAY}"
     ],
     "postCreateCommand": {
-        "source ros libraries": "echo source /opt/ros/humble/setup.bash >> ~/.bashrc",
-        "source workspace": "echo source /workspaces/robot_collision_checking/install/setup.bash",
-        "initialize rosdep": "sudo apt-get update && rosdep update && sudo rosdep install --from-paths src --ignore-src -y",
+        "source ros distro": "echo source /opt/ros/humble/setup.bash >> ~/.bashrc",
+        "source workspace": "echo source /workspaces/robot_collision_checking/install/setup.bash >> ~/.bashrc",
+        "initialize rosdep": "sudo apt-get update && sudo apt-get install ros-${ROS_DISTRO}-rviz2 && rosdep update && sudo rosdep install --from-paths src --ignore-src -y",
         "initialize starship": "echo eval '$(starship init bash)' >> ~/.bashrc"
     }
 }
